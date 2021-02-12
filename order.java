@@ -6,6 +6,8 @@ public class Order {
     public Order(boolean filled, double cost, String shippingMethod) {
         if (cost > 24.00) {
             System.out.println("High value item!");
+        } else {
+            System.out.println("Low value item!");
         }
         isFilled = filled;
         billAmount = cost;
@@ -15,29 +17,36 @@ public class Order {
     public void ship() {
         if (isFilled) {
             System.out.println("Shipping");
-            System.out.println("Shipping cost: " + calculateShipping());
         } else {
             System.out.println("Order not ready");
         }
+
+        double shippingCost = calculateShipping();
+
+        System.out.println("Shipping cost: ");
+        System.out.println(shippingCost);
     }
 
     public double calculateShipping() {
-        // declare conditional statement here
-        if (shipping.equals("Regular")) {
-            return 0;
-        } else if (shipping.equals("Express")) {
-            return 1.75;
-        } else {
-            return .50;
+        double shippingCost;
+        switch (shipping) {
+            case "Regular":
+                shippingCost = 0;
+                break;
+            case "Express":
+                shippingCost = 1.75;
+                break;
+            default:
+                shippingCost = .50;
         }
+        return shippingCost;
     }
 
     public static void main(String[] args) {
-        // do not alter the main method!
-        Order book = new Order(true, 9.99, "Express");
-        Order chemistrySet = new Order(false, 72.50, "Regular");
+        // create instances and call methods here!
+        Order a = new Order(true, 1.20, "Express");
 
-        book.ship();
-        chemistrySet.ship();
+
+
     }
 }
